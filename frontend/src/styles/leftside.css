@@ -135,7 +135,7 @@
   color: var(--primary);
 }
 .sidebar-msg .img img {
-  width: 300px;
+  width: 250px;
 }
 .waring-noti {
   position: fixed;

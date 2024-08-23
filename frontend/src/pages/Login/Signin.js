@@ -70,7 +70,7 @@ const Signin = () => {
                     <button type="submit">{user?.loading ? <Spinner /> : 'Login'}</button>
                 </form>
                 <div className="forget">
-                    New user?<Link style={{textDecoration: 'none'}} to="/signup">Register</Link>
+                    New user?<Link style={{textDecoration: 'none'}} to="/signup"><span style={{marginLeft: '5px'}}>Register</span></Link>
                 </div>
             </div>
         </div>

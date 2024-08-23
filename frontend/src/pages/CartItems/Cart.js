@@ -8,6 +8,8 @@ import CartItemCard from '../../components/CartItemCard'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import HeaderLogo from '../../components/HeaderLogo'
+import bg from '../../assets/cartimg.png'
+
 
 const Cart = () => {
     const cartItems = useSelector(state => state.cart.cartItems)
@@ -30,12 +32,14 @@ const Cart = () => {
     return (
         <>
             <SideBar />
-            <HeaderLogo title="MY CART" />
+            <HeaderLogo />
+            <div className='cart'>
             <div className='cart-screen'>
                 {
                     cartItems?.length > 0 ? (
                         <div className='cartarea'>
                             <div className="allitems">
+                            <h5>CART</h5>
                                 {cartItems.map((item) => (
                                     <CartItemCard key={item.product} item={item} />
                                 ))}
@@ -75,6 +79,8 @@ const Cart = () => {
                         </>
                     )
                 }
+            </div>
+            <img src={bg} height={400} width={200} className='bgimg'/>
             </div>
         </>
     )

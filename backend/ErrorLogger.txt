@@ -66,3 +66,13 @@ ValidationError: Product validation failed: image: Path `image` is required.
     at /Users/kruthikak/Desktop/Kruthika/Github Projects/eatsy-green/backend/node_modules/mongoose/lib/document.js:2985:17
     at /Users/kruthikak/Desktop/Kruthika/Github Projects/eatsy-green/backend/node_modules/mongoose/lib/schematype.js:1350:9
     at process.processTicksAndRejections (node:internal/process/task_queues:77:11)
+ValidationError: Address validation failed: name: Path `name` is required., mobNo: Path `mobNo` is required., pinCode: Path `pinCode` is required., address: Path `address` is required., town: Path `town` is required., state: Path `state` is required., city: Path `city` is required.
+    at Document.invalidate (/Users/kruthikak/Desktop/Kruthika/Github Projects/eatsy-green/backend/node_modules/mongoose/lib/document.js:3197:32)
+    at /Users/kruthikak/Desktop/Kruthika/Github Projects/eatsy-green/backend/node_modules/mongoose/lib/document.js:2985:17
+    at /Users/kruthikak/Desktop/Kruthika/Github Projects/eatsy-green/backend/node_modules/mongoose/lib/schematype.js:1350:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:77:11)
+ValidationError: Address validation failed: mobNo: Path `mobNo` is required., pinCode: Path `pinCode` is required., address: Path `address` is required., town: Path `town` is required., state: Path `state` is required., city: Path `city` is required.
+    at Document.invalidate (/Users/kruthikak/Desktop/Kruthika/Github Projects/eatsy-green/backend/node_modules/mongoose/lib/document.js:3197:32)
+    at /Users/kruthikak/Desktop/Kruthika/Github Projects/eatsy-green/backend/node_modules/mongoose/lib/document.js:2985:17
+    at /Users/kruthikak/Desktop/Kruthika/Github Projects/eatsy-green/backend/node_modules/mongoose/lib/schematype.js:1350:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:77:11)

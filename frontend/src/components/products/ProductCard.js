@@ -36,7 +36,7 @@ const ProductCard = ({ product }) => {
                 product?.map((item, i) => (
                     <div key={i} className='product-card'>
                         <div className="img">
-                            <img src={item?.image} alt="" />
+                            <img src={item?.image} alt=""/>
                         </div>
                         <div className="des">
                             <h3>{item?.name}</h3>

@@ -1,8 +1,9 @@
 .auth {
-    background: #488630;
+    background: url("../assets/bg1.png");
+    background-size: cover;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
     height: 100vh;
     position: relative;
@@ -11,8 +12,8 @@
     position: relative;
   }
   .auth .logo img {
-    width: 110px;
-    height: 70px;
+    width: 150px;
+    height: 80px;
     margin-bottom: 20px;
   }
   .form {
@@ -25,13 +26,14 @@
     align-items: center;
     justify-content: flex-start;
     box-shadow: 0 8px 16px rgb(0 0 0 / 8%);
+    margin: 13%;
   }
   .form form {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
   }
   form input , form label , form select{
     border: none;

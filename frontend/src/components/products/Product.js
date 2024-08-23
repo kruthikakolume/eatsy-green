@@ -23,7 +23,7 @@ const Product = ({category}) => {
           </>
           ):<ProductCard product={data}/>}
           <Message showModal={show}
-          msg={"Opps!,Something went wrong"}
+          msg={"Oops! Something went wrong"}
           type="error"
           closeModal={setShow}
           />  

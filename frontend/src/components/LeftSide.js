@@ -4,6 +4,7 @@ import { BsCart3, BsFillArrowRightSquareFill } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import green_del from '../assets/green_del.png'
+import packedfood from '../assets/file.png'
 import CartItemCard from './CartItemCard'
 const LeftSide = ({ data, show }) => {
     const cartItems = useSelector(state => state.cart.cartItems)
@@ -28,7 +29,7 @@ const LeftSide = ({ data, show }) => {
             </div>
             {show ? null : (<div className="sidebar-msg">
                 <div className="img">
-                    <img src={green_del} alt="" />
+                    <img src={packedfood} alt="" />
                 </div>
                 <div className="text">
                     <h4>Safe Delivery <span>@</span> your doors</h4>

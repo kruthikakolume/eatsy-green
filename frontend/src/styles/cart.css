@@ -1,5 +1,14 @@
 @import "./vars.css";
 
+.cart {
+  display: flex;
+  flex-direction: row;
+}
+
+.bgimg {
+  margin-top: 100px;
+  margin-right: 100px;
+}
 .cart-screen {
   display: flex;
   align-items: center;
