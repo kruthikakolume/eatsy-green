@@ -36,11 +36,11 @@ const Payment = () => {
   return (
     <>
       <SideBar />
-      <HeaderLogo title="Payment" />
+      <HeaderLogo />
       <div className='shipping'>
         <div className="progress">
           <div className="status">
-            <p>Bag</p>
+            <p>Cart</p>
             <div className={`divider`}></div>
             <p className={` ${path === '/shipping' && 'active'}`}>Shipping</p>
             <div className="divider"></div>

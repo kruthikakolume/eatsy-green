@@ -40,7 +40,7 @@
 }
 .ordersuccess-card img{
   width: 800px;
-  height: 600px;
+  height: 430px;
   display: flex;
   margin-left: auto;
   margin-right: auto;
@@ -103,6 +103,8 @@
 }
 .add p {
   font-weight: 600;
+  padding-top: 13px;
+  padding-left: 10px;
 }
 .add svg {
   font-size: 28px;
@@ -124,6 +126,7 @@
 }
 .status p {
   margin: 0 10px;
+  font-size: medium;
   color: var(--text-gary);
 }
 .status p.active {

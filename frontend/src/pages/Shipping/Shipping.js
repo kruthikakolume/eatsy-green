@@ -55,15 +55,17 @@ const Shipping = () => {
     return (
         <>
             <SideBar />
-            <HeaderLogo title="Shipping" />
+            <HeaderLogo />
             <div className='shipping'>
                 <div className="progress">
                     <div className="status">
-                        <p>Bag</p>
+                        <p>Cart</p>
                         <div className={`divider`}></div>
                         <p className={` ${path === '/shipping' && 'active'}`}>Shipping</p>
                         <div className="divider"></div>
                         <p className={` ${path === '/payment' && 'active'}`}>Payment</p>
+                        <div className="divider"></div>
+                        <p className={` ${path === '/order' && 'active'}`}>Order</p>
                     </div>
                 </div>
                 <div className="shipping-details">
