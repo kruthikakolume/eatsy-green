@@ -76,3 +76,18 @@ ValidationError: Address validation failed: mobNo: Path `mobNo` is required., pi
     at /Users/kruthikak/Desktop/Kruthika/Github Projects/eatsy-green/backend/node_modules/mongoose/lib/document.js:2985:17
     at /Users/kruthikak/Desktop/Kruthika/Github Projects/eatsy-green/backend/node_modules/mongoose/lib/schematype.js:1350:9
     at process.processTicksAndRejections (node:internal/process/task_queues:77:11)
+ValidationError: Product validation failed: name: Path `name` is required., image: Path `image` is required., category: Path `category` is required., price: Path `price` is required., description: Path `description` is required.
+    at Document.invalidate (/Users/kruthikak/Desktop/Kruthika/GithubProjects/eatsy-green/backend/node_modules/mongoose/lib/document.js:3197:32)
+    at /Users/kruthikak/Desktop/Kruthika/GithubProjects/eatsy-green/backend/node_modules/mongoose/lib/document.js:2985:17
+    at /Users/kruthikak/Desktop/Kruthika/GithubProjects/eatsy-green/backend/node_modules/mongoose/lib/schematype.js:1350:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:77:11)
+ValidationError: Product validation failed: name: Path `name` is required., image: Path `image` is required., category: Path `category` is required., price: Path `price` is required., description: Path `description` is required.
+    at Document.invalidate (/Users/kruthikak/Desktop/Kruthika/GithubProjects/eatsy-green/backend/node_modules/mongoose/lib/document.js:3197:32)
+    at /Users/kruthikak/Desktop/Kruthika/GithubProjects/eatsy-green/backend/node_modules/mongoose/lib/document.js:2985:17
+    at /Users/kruthikak/Desktop/Kruthika/GithubProjects/eatsy-green/backend/node_modules/mongoose/lib/schematype.js:1350:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:77:11)
+ValidationError: Product validation failed: name: Path `name` is required., image: Path `image` is required., category: Path `category` is required., price: Path `price` is required., description: Path `description` is required.
+    at Document.invalidate (/Users/kruthikak/Desktop/Kruthika/GithubProjects/eatsy-green/backend/node_modules/mongoose/lib/document.js:3197:32)
+    at /Users/kruthikak/Desktop/Kruthika/GithubProjects/eatsy-green/backend/node_modules/mongoose/lib/document.js:2985:17
+    at /Users/kruthikak/Desktop/Kruthika/GithubProjects/eatsy-green/backend/node_modules/mongoose/lib/schematype.js:1350:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:77:11)

@@ -1,7 +1,7 @@
 import React from 'react';
 import MainArea from '../../components/MainArea';
 import SideBar from '../../components/SideBar';
-import LeftSide from '../../components/LeftSide';
+import LeftSide from '../../components/DeliveryArea';
 import '../../styles/home.css';
 
 function Home() {

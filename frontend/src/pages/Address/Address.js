@@ -48,7 +48,7 @@ const Address = () => {
                                     </div>
                                 </div>
                             ))
-                            ) : <h3 style={{ padding: '20px 0' }}>No Address found! Add one</h3>}
+                            ) : <h5 style={{ padding: '20px 0' }}>No Address found! Add one</h5>}
 
                         <div className="add-address" onClick={() => setShow(true)}>
                             <div className="add">

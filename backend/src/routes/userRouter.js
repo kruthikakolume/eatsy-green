@@ -143,6 +143,23 @@ userRouter.post('/address', expressAsyncHandler(async (req, res) => {
 
 }))
 
+//Add Order
+userRouter.post('/orders', expressAsyncHandler(async (req, res) => {
+    console.log(req.body)
+    // const newOrder = Product({
+    //     name: req.body.name,
+    //     description: req.body.description,
+    //     image: req.body.image,
+    //     category: req.body.category,
+    //     price: req.body.price,
+    //     type: req.body.type,
+    //     countInStock: req.body.countInStock
+    // })
+    // const order = await newOrder.save()
+    // res.send(order)
+
+}))
+
 //Update User
 userRouter.put('/updateProfile', isAuth, expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)

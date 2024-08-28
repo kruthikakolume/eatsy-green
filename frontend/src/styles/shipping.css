@@ -170,9 +170,11 @@
   padding: 12px 15px;
   background: #eaeaec;
   margin: 10px 0;
+  cursor: pointer;
 }
 .select-opt label {
   margin-left: 10px;
+  cursor: pointer;
 }
 .address .cart-area {
   padding: 0px;

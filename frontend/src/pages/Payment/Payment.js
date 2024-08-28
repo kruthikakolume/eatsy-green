@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../../styles/shipping.css';
 import SideBar from '../../components/SideBar'
 import eatsygreen from "../../apis/eatsygreen"
 import HeaderLogo from '../../components/HeaderLogo';
+import { placeOrder } from '../../actions/orders';
 
 const Payment = () => {
   const location = useLocation();
@@ -17,12 +18,17 @@ const Payment = () => {
   const discount = 0;
   const totalPrice = (cartPrice + deleviryPrice) - discount;
   const [paymentType, setPaymentType] = useState('COD')
+
+  const dispatch = useDispatch()
+
   const handlePlaceOrder = async () => {
     if (paymentType === "stripe") {
       const data = await eatsygreen.get(`/api/products/payment/${totalPrice}`);
       window.open(data.data, '_blank');
+      dispatch(placeOrder(JSON.parse(localStorage.getItem('cartItems'))))
       navigate('/order')
     } else {
+      dispatch(placeOrder(JSON.parse(localStorage.getItem('cartItems'))))
       navigate('/order')
     }
   }
@@ -89,7 +95,7 @@ const Payment = () => {
                 <p style={{ fontWeight: 'bold', color: 'black' }}><span>$</span>{totalPrice}</p>
               </div>
             </div>
-            <button onClick={handlePlaceOrder} disabled={totalPrice === 0 ? true : false}>CONTINUE</button>
+            <button onClick={handlePlaceOrder} disabled={totalPrice === 0 ? true : false}>PAY</button>
           </div>
         </div>
 

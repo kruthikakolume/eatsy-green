@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SideBar from '../../components/SideBar';
 import Header from '../../components/Header';
-import LeftSide from '../../components/LeftSide';
+import LeftSide from '../../components/DeliveryArea';
 import ProductCard from '../../components/products/ProductCard';
 import Message from '../../components/Message';
 import { useLocation } from 'react-router-dom';

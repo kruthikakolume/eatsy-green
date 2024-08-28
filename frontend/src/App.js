@@ -21,29 +21,25 @@ import OrderSuccessful from './pages/Shipping/OrderSuccessful';
 function App() {
   return (
     <Router>
-      <Fragment>
-        <main>
-          <Routes>
-            <Route path='/' element={<Home />}></Route>
-            <Route path='/signin' element={<Signin />}></Route>
-            <Route path='/signup' element={<Signup />}></Route>
-            <Route path='/forgotPassword' element={<ForgotPassword />}></Route>
-            <Route path='/password-reset/:id/:token' element={<ResetPassword />}></Route>
-            <Route path="/search" element={<Search/>}/>
-            <Route path="/your-address" element={<Address/>}/>
-            <Route path='/recipes' element={<Recipes />}></Route>
-            <Route path='/dashboard' element={<Dashboard />}></Route>
-            <Route path="/cart" element={<Cart/>}/>
-            <Route path="/profile" element={<Profile/>}/>
-            <Route path='/admin' element={<Admin />}></Route>
-            <Route path='/signin' element={<Signin />}></Route>
-            <Route path='/addProduct' element={<AddProduct />}></Route>
-            <Route path="/shipping" element={<Shipping/>}/>
-            <Route path="/payment" element={<Payment/>}/>
-            <Route path="/order" element={<OrderSuccessful/>}/>
-          </Routes>
-        </main>
-      </Fragment>
+      <Routes>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/signin' element={<Signin />}></Route>
+        <Route path='/signup' element={<Signup />}></Route>
+        <Route path='/forgotPassword' element={<ForgotPassword />}></Route>
+        <Route path='/password-reset/:id/:token' element={<ResetPassword />}></Route>
+        <Route path="/search" element={<Search />} />
+        <Route path="/your-address" element={<Address />} />
+        <Route path='/recipes' element={<Recipes />}></Route>
+        <Route path='/dashboard' element={<Dashboard />}></Route>
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path='/admin' element={<Admin />}></Route>
+        <Route path='/signin' element={<Signin />}></Route>
+        <Route path='/addProduct' element={<AddProduct />}></Route>
+        <Route path="/shipping" element={<Shipping />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/order" element={<OrderSuccessful />} />
+      </Routes>
     </Router>
   );
 }
