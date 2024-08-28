@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import cartReducer from "./cartReducer";
-import pizzaReducer from "./pizzaReducers";
+import itemReducer from "./itemReducers";
 import {forgotPasswordReducer, signInReducer,signUpReducer, resetPasswordReducer} from './authReducer'
 import { addressReducer } from "./addressReducer";
 import { orderReducer,orderDetail, searchItems } from "./odersReducer";
@@ -8,7 +8,7 @@ import { sidebarReducer } from "./sidebarreducer";
 import productReducer from "./productsReducer";
 export default combineReducers({
     allProducts:productReducer,
-    allPizza:pizzaReducer,
+    allItems:itemReducer,
     cart:cartReducer,
     user:signInReducer,
     userRegister:signUpReducer,

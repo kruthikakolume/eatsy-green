@@ -1,11 +1,11 @@
 import eatsygreen from "../apis/eatsygreen"
-import { ERROR, ADD_PRODUCT, ADD_PRODUCT_SUCCESS, DELETE_PRODUCT, DELETE_PRODUCT_SUCCESS, UPDATE_PRODUCT, UPDATE_PRODUCT_SUCCESS, FETCH_ALL, FETCH_ALL_SUCCESS, FETCH_PIZZAS, FETCH_PIZZAS_SUCCESS, SEARCH_SUCCESS, SERACH_ERROR, SHEARCH_REQ, SHOW_SIDEBAR } from "./types"
+import { ERROR, ADD_PRODUCT, ADD_PRODUCT_SUCCESS, DELETE_PRODUCT, DELETE_PRODUCT_SUCCESS, UPDATE_PRODUCT, UPDATE_PRODUCT_SUCCESS, FETCH_ALL, FETCH_ALL_SUCCESS, FETCH_ITEMS, FETCH_ITEMS_SUCCESS, SEARCH_SUCCESS, SERACH_ERROR, SHEARCH_REQ, SHOW_SIDEBAR } from "./types"
 
-export const fetchPizzas=(category)=>async dispatch=>{
-  dispatch({type:FETCH_PIZZAS,payload:[]})
+export const fetchItems=(category)=>async dispatch=>{
+  dispatch({type:FETCH_ITEMS,payload:[]})
   try{
     const {data} = await eatsygreen.get(`/api/products?category=${category}`)
-    dispatch({type:FETCH_PIZZAS_SUCCESS,payload:data})
+    dispatch({type:FETCH_ITEMS_SUCCESS,payload:data})
   }
   catch(e){
     dispatch({type:ERROR,payload:'Opps!,something went wrong'}) 

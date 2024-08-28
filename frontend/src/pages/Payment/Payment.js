@@ -13,7 +13,7 @@ const Payment = () => {
   const user = useSelector(state => state.user.user)
   const cartItems = useSelector(state => state.cart.cartItems)
   const cartPrice = cartItems.reduce((total, itm) => total + itm?.price * itm?.qty, 0)
-  const deleviryPrice = (cartPrice > 100 || cartPrice === 0) ? 0 : 5
+  const deleviryPrice = (cartPrice > 20 || cartPrice === 0) ? 0 : 5
   const discount = 0;
   const totalPrice = (cartPrice + deleviryPrice) - discount;
   const [paymentType, setPaymentType] = useState('COD')

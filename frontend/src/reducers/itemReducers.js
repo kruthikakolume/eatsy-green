@@ -1,11 +1,11 @@
-import { ERROR, FETCH_PIZZAS, FETCH_PIZZAS_SUCCESS } from "../actions/types";
+import { ERROR, FETCH_ITEMS, FETCH_ITEMS_SUCCESS } from "../actions/types";
 
 
-const pizzaReducer=(state={data:[],loading:true},action)=>{
+const itemReducer=(state={data:[],loading:true},action)=>{
      switch (action.type) {
-         case FETCH_PIZZAS:
+         case FETCH_ITEMS:
              return {loading:true,data:action.payload}
-         case FETCH_PIZZAS_SUCCESS:
+         case FETCH_ITEMS_SUCCESS:
              return{loading:false,data:action.payload}
          case ERROR:
              return {loading:false,error:action.payload,data:[]}         
@@ -14,4 +14,4 @@ const pizzaReducer=(state={data:[],loading:true},action)=>{
      }
 }
 
-export default pizzaReducer
+export default itemReducer

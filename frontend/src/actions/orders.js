@@ -1,4 +1,4 @@
-import pizza from "../apis/eatsygreen"
+import item from "../apis/eatsygreen"
 import { CREATE_ORDER, CREATE_ORDER_ERROR, CREATE_ORDER_REQUEST, DELETE_CART, ORDER_DETAIlS, ORDER_DETAILS_FAIL, ORDER_DETAILS_REQURST, PAYMENT_METHOD } from "./types"
 import { doc, updateDoc ,getDoc} from "firebase/firestore";
 import {firestore,db} from '../firebase'
@@ -12,7 +12,7 @@ export const placeOrder=(order)=> async (dispatch,getState)=>{
       console.log(order)
    try {
       const user = getState().user?.user;
-      const {data} =await pizza.post('/api/orders',order,{
+      const {data} =await item.post('/api/orders',order,{
          headers:{
             Authorization: `Bearer ${user.token}`
          }
@@ -21,11 +21,11 @@ export const placeOrder=(order)=> async (dispatch,getState)=>{
       console.log("data","=>",data?.order.orderItems)
       data?.order.orderItems?.map((item)=>{
          console.log("exicution")
-         const docRef = doc(firestore, db.pizzas,item.name);
+         const docRef = doc(firestore, db.items,item.name);
         getDoc(docRef).then((docSnap)=>{
            console.log(docSnap.data())
          const inStockItem= docSnap.data().inStockItem
-          const ref = doc(firestore,db.pizzas,item.name);
+          const ref = doc(firestore,db.items,item.name);
           updateDoc(ref, {
             inStockItem: inStockItem-item.qty
            }).then(()=>console.log("added sucessfully"));
@@ -44,7 +44,7 @@ export const getOrderDetails=(id)=>async (dispatch,getState)=>{
    dispatch({type:ORDER_DETAILS_REQURST})
    try {
       const user = getState().user?.user;
-      const {data}=await pizza.get(`/api/orders/${id}`,{
+      const {data}=await item.get(`/api/orders/${id}`,{
          headers:{
             Authorization: `Bearer ${user.token}` 
          }
