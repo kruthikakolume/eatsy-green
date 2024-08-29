@@ -1,4 +1,4 @@
-import React ,{useState}from 'react'
+import React from 'react'
 import '../styles/sidebar.css'
 import {FaHome,FaTimes} from 'react-icons/fa'
 import {BsGear} from 'react-icons/bs'

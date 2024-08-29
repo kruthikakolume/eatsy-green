@@ -1,13 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import { IoMdAdd } from 'react-icons/io';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addToCart } from '../../actions/cart';
 
 const ProductCard = ({ product }) => {
-    const user = useSelector(state => state.user.user)
-    const wishlist = useSelector(state => state.wishlist)
-    const [currenItemClicked, setCurrenItem] = useState()
     const dispatch = useDispatch()
 
     const cartHandler = (item) => {

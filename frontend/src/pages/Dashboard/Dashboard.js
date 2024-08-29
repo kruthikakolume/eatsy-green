@@ -42,7 +42,7 @@ function Dashboard() {
                                         return (
                                             <Alert className='feedtext'>
                                                 {f.info + ' @ '}
-                                                <a href={f.loc} target="_blank">{f.address}</a><br />{" Please contact on "}
+                                                <a href={f.loc} target="_blank" rel="noreferrer">{f.address}</a><br />{" Please contact on "}
                                                 <a href={"https://wa.me/" + f.contact}>{"Whatsapp"}</a>
                                             </Alert>
                                         )

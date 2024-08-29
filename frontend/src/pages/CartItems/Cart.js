@@ -6,7 +6,7 @@ import SideBar from '../../components/SideBar'
 import emtycart from '../../assets/emtycart.gif'
 import CartItemCard from '../../components/CartItemCard'
 import { Link } from 'react-router-dom'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import HeaderLogo from '../../components/HeaderLogo'
 import bg from '../../assets/cartimg.png'
 
@@ -19,8 +19,6 @@ const Cart = () => {
     const totalPrice = (cartPrice + deleviryPrice) - discount;
     const auth = useSelector(state => state.user.user)
     const navigate = useNavigate()
-    const location = useLocation();
-    const path = location.pathname
 
     useEffect(()=>{
         window.scrollTo(0, 0);
@@ -86,7 +84,7 @@ const Cart = () => {
                     )
                 }
             </div>
-            <img src={bg} height={400} width={200} className='bgimg'/>
+            <img src={bg} height={400} width={200} className='bgimg' alt=""/>
             </div>
         </>
     )

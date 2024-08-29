@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../../styles/auth.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -10,7 +10,6 @@ import Spinner from '../../components/Spinner';
 import { siginUser } from '../../actions/auth';
 
 const Signin = () => {
-    const [isLoading, setLoading] = useState(false)
     const dispatch = useDispatch();
     const user = useSelector(state => state.user)
     const location = useLocation()
@@ -47,7 +46,6 @@ const Signin = () => {
                 navigate(redirect)
             }
         }
-        setLoading(true)
     }
 
     return (
@@ -65,12 +63,12 @@ const Signin = () => {
                     <input type="password" name="password" id="" placeholder='Password' {...register('password', { required: true })} />
                     {errors?.password?.message && <p className="err">{errors?.password?.message}</p>}
                     <div className="text">
-                        <Link style={{textDecoration: 'none'}} to="/forgotPassword">  <p>Forgot Password?</p></Link>
+                        <Link style={{ textDecoration: 'none' }} to="/forgotPassword">  <p>Forgot Password?</p></Link>
                     </div>
                     <button type="submit">{user?.loading ? <Spinner /> : 'Login'}</button>
                 </form>
                 <div className="forget">
-                    New user?<Link style={{textDecoration: 'none'}} to="/signup"><span style={{marginLeft: '5px'}}>Register</span></Link>
+                    New user?<Link style={{ textDecoration: 'none' }} to="/signup"><span style={{ marginLeft: '5px' }}>Register</span></Link>
                 </div>
             </div>
         </div>
