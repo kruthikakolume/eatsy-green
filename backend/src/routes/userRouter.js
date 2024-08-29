@@ -1,22 +1,22 @@
-import { Router } from 'express';
-const userRouter = Router();
-import Token, { findOne } from "../models/token";
-import { randomBytes } from "crypto";
-import sendEmail from "../utilities/sendEmail";
-import { object, string } from "joi";
-import passwordComplexity from "joi-password-complexity";
-import { compareSync, hashSync } from "bcrypt";
-import { sign, verify } from "jsonwebtoken";
-import { join } from 'path';
-require('dotenv').config({path:join(__dirname,'..','..','.env')});
+const express = require('express');
+const userRouter = express.Router();
+const Token = require("../models/token");
+const crypto = require("crypto");
+const sendEmail = require("../utilities/sendEmail");
+const Joi = require("joi");
+const passwordComplexity = require("joi-password-complexity");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const path = require('path');
+require('dotenv').config({path:path.join(__dirname,'..','..','.env')});
 
-import expressAsyncHandler from 'express-async-handler';
+const expressAsyncHandler = require('express-async-handler');
 
-import User, { findOne as _findOne, findById } from '../models/User';
-import Address, { find, deleteOne, findById as _findById } from '../models/Address';
+const User = require('../models/User');
+const Address = require('../models/Address');
 
 const genrateToken =(user)=>{
-    return sign({
+    return jwt.sign({
         _id:user._id,
         name:user.name,
         email:user.email,
@@ -30,7 +30,7 @@ const isAuth=(req,res,next)=>{
    
     if(authorization){
       const token = authorization.slice(7,authorization.length) //bearer token value
-      verify(token,'EatsyGreen',(err,decode)=>{
+      jwt.verify(token,'EatsyGreen',(err,decode)=>{
           if(err){
               res.status(401).send({message:err.message})
           }
@@ -48,9 +48,9 @@ const isAuth=(req,res,next)=>{
 
 // post request for signining users
 userRouter.post('/signin', expressAsyncHandler(async (req, res) => {
-    const user = await _findOne({ email: req.body.email })
+    const user = await User.findOne({ email: req.body.email })
     if (user) {
-        if (compareSync(req.body.password, user.password)) { // if password mateches
+        if (bcrypt.compareSync(req.body.password, user.password)) { // if password mateches
             res.send({
                 _id: user._id,
                 name: user.name,
@@ -68,7 +68,7 @@ userRouter.post('/signin', expressAsyncHandler(async (req, res) => {
 
 //post route for signup
 userRouter.post('/signup', expressAsyncHandler(async (req, res) => {
-    const user = await _findOne({ email: req.body.email })
+    const user = await User.findOne({ email: req.body.email })
     if (user) {
         res.status(401).send({ message: 'User already exits' })
 
@@ -76,7 +76,7 @@ userRouter.post('/signup', expressAsyncHandler(async (req, res) => {
         const newUser = User({
             name: req.body.name,
             email: req.body.email,
-            password: hashSync(req.body.password, 10)
+            password: bcrypt.hashSync(req.body.password, 10)
         });
         const user = await newUser.save();
         res.send({
@@ -95,19 +95,19 @@ userRouter.post('/signup', expressAsyncHandler(async (req, res) => {
 
 userRouter.get('/shipping/:id', expressAsyncHandler(async (req, res) => {
     const id = req.params.id
-    const address = await find({ userId: id })
+    const address = await Address.find({ userId: id })
     res.send(address)
 }))
 
 //delete address
 userRouter.delete('/address/:id', expressAsyncHandler(async (req, res) => {
-    await deleteOne({ _id: req.params.id })
+    await Address.deleteOne({ _id: req.params.id })
     res.send({ id: req.params.id })
 }))
 
 //update address
 userRouter.put('/address/:id', isAuth, expressAsyncHandler(async (req, res) => {
-    const address = await _findById(req.params.id)
+    const address = await Address.findById(req.params.id)
 
     if (address) {
         address.name = req.body.name;
@@ -145,7 +145,7 @@ userRouter.post('/address', expressAsyncHandler(async (req, res) => {
 
 //Update User
 userRouter.put('/updateProfile', isAuth, expressAsyncHandler(async (req, res) => {
-    const user = await findById(req.user._id)
+    const user = await User.findById(req.user._id)
     if (user) {
         user.name = req.body.name;
         user.mobNo = req.body.mobNo
@@ -169,24 +169,24 @@ userRouter.put('/updateProfile', isAuth, expressAsyncHandler(async (req, res) =>
 // send password link
 userRouter.post("/forgotPassword", async (req, res) => {
 	try {
-		const emailSchema = object({
-			email: string().email().required().label("Email"),
+		const emailSchema = Joi.object({
+			email: Joi.string().email().required().label("Email"),
 		});
 		const { error } = emailSchema.validate(req.body);
 		if (error)
 			return res.status(400).send({ message: error.details[0].message });
 
-		let user = await _findOne({ email: req.body.email });
+		let user = await User.findOne({ email: req.body.email });
 		if (!user)
 			return res
 				.status(409)
 				.send({ message: "User with given email does not exist!" });
 
-		let token = await findOne({ userId: user._id });
+		let token = await Token.findOne({ userId: user._id });
 		if (!token) {
 			token = await new Token({
 				userId: user._id,
-				token: randomBytes(32).toString("hex"),
+				token: crypto.randomBytes(32).toString("hex"),
 			}).save();
 		}
 
@@ -204,10 +204,10 @@ userRouter.post("/forgotPassword", async (req, res) => {
 // verify password reset link
 userRouter.get("/password-reset/:id/:token", async (req, res) => {
 	try {
-		const user = await _findOne({ _id: req.params.id });
+		const user = await User.findOne({ _id: req.params.id });
 		if (!user) return res.status(400).send({ message: "Invalid link" });
 
-		const token = await findOne({
+		const token = await Token.findOne({
 			userId: user._id,
 			token: req.params.token,
 		});
@@ -222,10 +222,10 @@ userRouter.get("/password-reset/:id/:token", async (req, res) => {
 //Update password
 userRouter.post("/resetPassword/:id/:token", async (req, res) => {
 	try {
-		const user = await _findOne({ _id: req.params.id });
+		const user = await User.findOne({ _id: req.params.id });
 		if (!user) return res.status(400).send({ message: "Invalid link" });
 
-		const token = await findOne({
+		const token = await Token.findOne({
 			userId: user._id,
 			token: req.params.token,
 		});
@@ -233,7 +233,7 @@ userRouter.post("/resetPassword/:id/:token", async (req, res) => {
 
 		if (!user.verified) user.verified = true;
 
-		const hashPassword = await hashSync(req.body.password, 10)
+		const hashPassword = await bcrypt.hashSync(req.body.password, 10)
 
 		user.password = hashPassword;
 		await user.save();
@@ -245,4 +245,4 @@ userRouter.post("/resetPassword/:id/:token", async (req, res) => {
 	}
 });
 
-export default userRouter;
+module.exports = userRouter;

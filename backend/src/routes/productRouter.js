@@ -1,9 +1,9 @@
-import { Router } from 'express';
-const productRouter = Router();
-import expressAsyncHandler from 'express-async-handler';
+const express = require('express');
+const productRouter = express.Router();
+const expressAsyncHandler = require('express-async-handler');
 
-import Product, { find, findByIdAndUpdate, findById, deleteOne } from '../models/Product';
-import Wishlist, { findOne, find as _find, deleteOne as _deleteOne } from '../models/Wishlist';
+const Product = require('../models/Product');
+const Wishlist = require('../models/Wishlist');
 
 const stripe = require('stripe')('sk_test_51MCwj2L0wTDAd1EX3i2qWiNsyBv4BBfMnCpHdu7e0B2WZwUvc1G9fALZ0zo1SBprywq3Bl0O1IppanvSS9Ded8rj00uLe9RJuN');
 
@@ -30,20 +30,20 @@ const isAuth = (req, res, next) => {
 
 //Get all products by category
 productRouter.get('/', expressAsyncHandler(async (req, res) => {
-    const products = await find({ category: req.query.category }) //return all products
+    const products = await Product.find({ category: req.query.category }) //return all products
     res.send(products)
 }));
 
 //Get All products
 productRouter.get('/getAllProducts', expressAsyncHandler(async (req, res) => {
-    const products = await find() //return all products
+    const products = await Product.find() //return all products
     res.send(products)
 }));
 
 //Search product
 productRouter.get('/search', expressAsyncHandler(async (req, res) => {
     let regEx = new RegExp(req.query.name, 'i');
-    const serachedProducts = await find({ name: regEx })
+    const serachedProducts = await Product.find({ name: regEx })
     if (serachedProducts) {
         res.send(serachedProducts)
 
@@ -54,7 +54,7 @@ productRouter.get('/search', expressAsyncHandler(async (req, res) => {
 
 //Add to Wishlist
 productRouter.post('/wishlist', isAuth, expressAsyncHandler(async (req, res) => {
-    const item = await findOne({ product: req.body._id });
+    const item = await Wishlist.findOne({ product: req.body._id });
     if (item) {
         res.status(409).send({ message: 'Item Already exits' });
     }
@@ -85,35 +85,35 @@ productRouter.post('/add-product', expressAsyncHandler(async (req, res) => {
         countInStock: req.body.countInStock
     })
     await newProduct.save();
-    const products = await find()
+    const products = await Product.find()
     res.send(products)
 }))
 
 //Update product
 productRouter.put('/update-product/:id', expressAsyncHandler(async (req, res) => {
-    await findByIdAndUpdate({ _id: req.params.id }, {countInStock: req.body.countInStock})
-    const products = await find()
+    await Product.findByIdAndUpdate({ _id: req.params.id }, {countInStock: req.body.countInStock})
+    const products = await Product.find()
     res.send(products)
 }))
 
 //Get products in wishlist
 productRouter.get('/wishlist', isAuth, expressAsyncHandler(async (req, res) => {
 
-    const items = await _find({ userId: req.user._id });
+    const items = await Wishlist.find({ userId: req.user._id });
     res.send(items)
 
 }))
 
 //Delete product from wishlist
 productRouter.delete('/wishlist/:id', isAuth, expressAsyncHandler(async (req, res) => {
-    const items = await _deleteOne({ productId: req.params.id });
+    const items = await Wishlist.deleteOne({ productId: req.params.id });
     res.send(req.params.id)
 
 }))
 
 //Find the product by id
 productRouter.get('/:id', expressAsyncHandler(async (req, res) => {
-    const product = await findById(req.params.id)
+    const product = await Product.findById(req.params.id)
     if (product) {
         res.send(product)
     } else {
@@ -123,8 +123,8 @@ productRouter.get('/:id', expressAsyncHandler(async (req, res) => {
 
 //Delete product by id
 productRouter.delete('/:id', expressAsyncHandler(async (req, res) => {
-    await deleteOne({ _id: req.params.id })
-    const products = await find()
+    await Product.deleteOne({ _id: req.params.id })
+    const products = await Product.find()
     res.send(products)
 }))
 
@@ -153,4 +153,4 @@ productRouter.get('/payment/:price', expressAsyncHandler(async (req, res) => {
     }
 }))
 
-export default productRouter;
+module.exports = productRouter;
